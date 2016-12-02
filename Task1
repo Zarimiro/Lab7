@@ -1,0 +1,22 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+struct Book{
+    char fio[64];
+    char name[64];
+    char public[64];
+    int year,page;
+};
+int main(int argc, char* argv[]){
+    int n;
+    cout<<"Enter the number of books:";
+    scanf("%d",&n);
+    Book *pB;
+    pB=new Book[n];
+    for(int i=0;i<n;i++){
+        cout<<"Book number "<< i+1<<endl;
+        cout<<"Author name+surname:";
+        
+    }
+}
