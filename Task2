@@ -1,0 +1,73 @@
+#include <iostream>
+//using namespace std;
+#include "stdafx.h"
+#include <stdio.h>
+#include<stdlib.h>
+
+struct Book {
+	char fio[64];
+	char name[64];
+	char pub[64];
+	int year, page;
+};
+struct List // Линейный односвязный список
+{
+	Book book;
+	List *pNext;
+};
+
+// Добавляем элемент в начало списка
+void add(List *& pF, List *p)
+{
+	p->pNext = pF;
+	pF = p;
+}
+
+// Печать списка
+/*void printList(List *pF)
+{
+	for (List *pi = pF; pi; pi = pi->pNext) {
+		printf(pi->book.fio);
+		printf(pi->book.name);
+		printf(pi->book.pub);
+		printf(pi->book.year);
+		printf(pi->book.page);
+	}
+}*/
+
+int main(int argc, char* argv[])
+{
+
+	List *pF = 0;
+	List *p;
+	int n=3;
+	int j=1;
+	FILE *pf1;
+	//pF1 = fopen("Books.dat", "r");
+	fopen_s(&pf1, "Books.dat", "r");
+	if (pf1 == 0)
+	{
+		printf("Error. File not found");
+		system("pause");
+		return 0;
+	}
+	fread(&n, sizeof(int), 1, pf1);  // Читаем число элементов массива
+	for (int i = 0; i<n; i++) // Читаем книги по 1-му элементу
+	{
+		p = (List *)malloc(sizeof(List)); // Создаем элемент списка
+		fread(&p->book, sizeof(Book), 1, pf1); 
+		add(pF, p); 
+	}
+	for (List *pi = pF; pi; pi = pi->pNext) {
+		printf("\nBook number: %u ",j );
+		printf("\nAuthor name: %s",pi->book.fio);
+		printf("\nBook title: %s",pi->book.name);
+		printf("\nBook publishment: %s",pi->book.pub);
+		printf("\nPublished in: %d",pi->book.year);
+		printf("\nAmount of pages: %d",pi->book.page);
+		++j;
+	}
+	fclose(pf1);
+	system("pause");
+	return 0;
+}
