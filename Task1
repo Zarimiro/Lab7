@@ -1,50 +1,43 @@
-#include<stdlib.h>
+#include<conio.h>
+#include"stdafx.h"
 #include<stdio.h>
 #include<iostream>
 using namespace std;
-struct Book{
-    char fio[64];
-    char name[64];
-    char pub[64];
-    int year,page;
+struct Book {
+	char fio[64];
+	char name[64];
+	char pub[64];
+	int year, page;
 };
-int main(int argc, char* argv[]){
-    int n;
-    cout<<"Enter the number of books:";
-    cin>>n;
-    Book *pb;
-    pb=new Book[n];
-    for(int i=0;i<n;i++) {
-        cout << "Book number " << i + 1 << endl;
-        cout << "Author name+surname:" << endl;
-        fflush(stdin);
-        cin >> pb[i].fio;
-        // cin.getline(pB[i].fio,63);
-        //_getch();
-        cout << "\nEnter the book name:" << endl;
-        fflush(stdin);
-        cin >> pb[i].name;
-        // cin.getline(pB[i].name,63);
-        //_getch();
-        cout << "\nPublishment:" << endl;
-        fflush(stdin);
-        cin >> pb[i].pub;
-        //cin.getline(pB[i].pub,63);
-        //_getch();
-        cout << "\nEnter the publishment year:" << endl;
-        cin >> pb[i].year;
-        cout << "\nEnter the amount of pages:" << endl;
-        cin >> pb[i].page;
-    }
-    FILE *pf;
-    fopen(&pf,"Books.dat","wb");
-    fwrite(&n,sizeof(int),1,&pf);
-    fwrite(pb,sizeof(Book),n,&pf);
-    fclose(pf);
-
-
-    delete pb;
-    return 0;
+int main(int argc, char* argv[]) {
+	int n;
+	cout << "Enter the number of books:";
+	cin >> n;
+	Book *pb;
+	pb = new Book[n];
+	for (int i = 0; i<n; i++) {
+		cout << "Book number " << i + 1 << endl;
+		cout << "Author name+surname:" << endl;
+		fflush(stdin);
+		cin >> pb[i].fio;
+		cout << "\nEnter the book name:" << endl;
+		fflush(stdin);
+		cin >> pb[i].name;
+		cout << "\nPublishment:" << endl;
+		fflush(stdin);
+		cin >> pb[i].pub;
+		cout << "\nEnter the publishment year:" << endl;
+		cin >> pb[i].year;
+		cout << "\nEnter the amount of pages:" << endl;
+		cin >> pb[i].page;
+	}
+	FILE *pf;
+	fopen_s(&pf, "Books.dat", "wb");
+	fwrite(&n, sizeof(int), 1, pf);
+	fwrite(pb, sizeof(Book), n, pf);
+	fclose(pf);
+	delete pb;
+	return 0;
 
 
 
